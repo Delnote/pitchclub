@@ -1,21 +1,12 @@
 package org.bot;
 
+import org.bot.entites.DataEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class DataRepository {
-
-    private final Map<String, String> storage = new ConcurrentHashMap<>();
-
-    public void save(String key, String value) {
-        storage.put(key, value);
-    }
-
-    public Optional<String> get(String key) {
-        return Optional.ofNullable(storage.get(key));
-    }
+public interface DataRepository extends JpaRepository<DataEntity, Long> {
+    Optional<DataEntity> findByKey(String key);
 }

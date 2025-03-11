@@ -1,9 +1,11 @@
 package org.bot;
 
+import org.bot.entites.DataEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +21,15 @@ public class DataController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveData(@RequestParam String key, @RequestParam String value) {
-        dataService.save(key, value);
-        return ResponseEntity.ok("Saved successfully");
+    public ResponseEntity<String> saveData(@RequestBody DataEntity payload) {
+//        String key = payload.get("key");
+//        String value = payload.get("value");
+        dataService.save(payload);
+        return ResponseEntity.ok("Data saved successfully");
     }
 
     @GetMapping("/get")
-    public ResponseEntity<String> getData(@RequestParam String key) {
+    public ResponseEntity<String> getData(@RequestParam(name = "key") String key) {
         return dataService.get(key)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Key not found"));

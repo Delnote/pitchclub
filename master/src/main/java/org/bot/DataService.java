@@ -1,5 +1,6 @@
 package org.bot;
 
+import org.bot.entites.DataEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,11 +14,11 @@ public class DataService {
         this.repository = repository;
     }
 
-    public void save(String key, String value) {
-        repository.save(key, value);
+    public void save(DataEntity data) {
+        repository.save(data);
     }
 
     public Optional<String> get(String key) {
-        return repository.get(key);
+        return repository.findByKey(key).map(DataEntity::getValue);
     }
 }
