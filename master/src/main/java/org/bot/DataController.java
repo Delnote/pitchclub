@@ -22,8 +22,6 @@ public class DataController {
 
     @PostMapping("/save")
     public ResponseEntity<String> saveData(@RequestBody DataEntity payload) {
-//        String key = payload.get("key");
-//        String value = payload.get("value");
         dataService.save(payload);
         return ResponseEntity.ok("Data saved successfully");
     }
