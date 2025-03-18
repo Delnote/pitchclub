@@ -21,19 +21,19 @@ public class DataEntity {
     private UUID id;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String surname;
-
-    @Column
-    private String secondName;
+    private String fio;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, unique = true)
-    private String phone;
+    private String telegram;
+
+    @Column(nullable = false)
+    private String about;
+
+    @Column(nullable = false)
+    private String vision;
 
     @Column(nullable = false)
     private String password;

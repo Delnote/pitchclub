@@ -14,6 +14,8 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.apache.commons.lang3.RandomStringUtils.random;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -46,6 +48,7 @@ public class AuthController {
         payload.setJoinDate(Instant.now());
         payload.setUpdateDate(Instant.now());
         payload.setIsActivated(false);
+        payload.setPassword(random(10, true, true));
         dataService.save(payload);
         return ResponseEntity.ok("Data saved successfully");
     }
