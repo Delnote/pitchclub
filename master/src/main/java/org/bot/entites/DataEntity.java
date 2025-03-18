@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -36,4 +37,13 @@ public class DataEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Boolean isActivated;
+
+    @Column(nullable = false)
+    private Instant updateDate;
+
+    @Column(nullable = false)
+    private Instant joinDate;
 }

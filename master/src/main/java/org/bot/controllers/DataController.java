@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +29,9 @@ public class DataController {
 
     @PostMapping("/save")
     public ResponseEntity<String> saveData(@RequestBody DataEntity payload) {
+        payload.setIsActivated(false);
+        payload.setJoinDate(Instant.now());
+        payload.setUpdateDate(Instant.now());
         dataService.save(payload);
         return ResponseEntity.ok("Data saved successfully");
     }
@@ -35,6 +39,14 @@ public class DataController {
     @GetMapping("/get")
     public ResponseEntity<Object> getData(@RequestParam(name = "id") UUID id) {
         Optional<DataEntity> entity = dataService.get(id);
-        return entity.<ResponseEntity<Object>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found"));
+        if (entity.isPresent()) {
+            DataEntity dataEntity = entity.get();
+            dataEntity.setPassword(null);
+            dataEntity.setIsActivated(null);
+            dataEntity.setJoinDate(null);
+            return ResponseEntity.ok(dataEntity);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
 }
