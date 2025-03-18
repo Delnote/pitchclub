@@ -1,4 +1,4 @@
-package org.bot;
+package org.bot.controllers;
 
 import org.bot.token.JwtUtil;
 import org.springframework.http.ResponseEntity;

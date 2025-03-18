@@ -1,9 +1,10 @@
-package org.bot;
+package org.bot.db;
 
 import org.bot.entites.DataEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DataService {
@@ -18,7 +19,7 @@ public class DataService {
         repository.save(data);
     }
 
-    public Optional<String> get(String key) {
-        return repository.findByKey(key).map(DataEntity::getValue);
+    public Optional<DataEntity> get(UUID id) {
+        return repository.findById(id);
     }
 }

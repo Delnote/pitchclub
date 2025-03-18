@@ -12,28 +12,15 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "data_store")
-public class DataEntity {
-
+@Table(name = "article")
+public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
-    private String surname;
-
-    @Column
-    private String secondName;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false, unique = true)
-    private String phone;
-
-    @Column(nullable = false)
-    private String password;
+    private String value;
 }
